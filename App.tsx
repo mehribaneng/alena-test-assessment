@@ -1,21 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ImageBackground,
+} from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 
 import { DATA } from "./src/mocks";
 import ArrowButton from "./src/components/ArrowButton";
-import BackgroundGradient from "./src/components/BackgroundGradient";
 import Button from "./src/components/Button";
 import List from "./src/components/List";
 import Modal from "./src/components/Modal";
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
-      <BackgroundGradient />
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Keep the splash screen visible while we fetch resources
+        await SplashScreen.preventAutoHideAsync();
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
 
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
+  return (
+    <ImageBackground
+      source={require("./assets/gradient-bg-main.jpeg")}
+      resizeMode="cover"
+      onLoadEnd={onLayoutRootView}
+    >
       <SafeAreaView>
         <StatusBar style="auto" />
 
@@ -36,7 +71,7 @@ export default function App() {
       </SafeAreaView>
 
       {isOpen && <Modal setIsOpen={setIsOpen} />}
-    </>
+    </ImageBackground>
   );
 }
 
