@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 import { DATA } from "./src/mocks";
 import List from "./src/components/List";
+import Button from "./src/components/Button";
 
 export default function App() {
   return (
@@ -13,6 +14,9 @@ export default function App() {
         <View>
           <Text style={styles.title}>To reach this goal, we will:</Text>
           <List data={DATA} />
+          <View style={styles.buttonWrapper}>
+            <Button onPress={() => console.log("button pressed")} />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -32,5 +36,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 34,
     color: "#1D1917",
+  },
+  buttonWrapper: {
+    marginTop: 46,
+    alignItems: "center",
   },
 });
