@@ -4,8 +4,9 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 import { DATA } from "./src/mocks";
 import ArrowButton from "./src/components/ArrowButton";
-import List from "./src/components/List";
+import BackgroundGradient from "./src/components/BackgroundGradient";
 import Button from "./src/components/Button";
+import List from "./src/components/List";
 import Modal from "./src/components/Modal";
 
 export default function App() {
@@ -13,6 +14,8 @@ export default function App() {
 
   return (
     <>
+      <BackgroundGradient />
+
       <SafeAreaView>
         <StatusBar style="auto" />
 
