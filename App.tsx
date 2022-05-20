@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 import { DATA } from "./src/mocks";
+import ArrowButton from "./src/components/ArrowButton";
 import List from "./src/components/List";
 import Button from "./src/components/Button";
 import Modal from "./src/components/Modal";
@@ -22,6 +23,11 @@ export default function App() {
             <View style={styles.buttonWrapper}>
               <Button onPress={() => setIsOpen(true)} />
             </View>
+          </View>
+
+          <View style={styles.footer}>
+            <ArrowButton isDisabled />
+            <ArrowButton rotateDeg={180} />
           </View>
         </View>
       </SafeAreaView>
@@ -47,6 +53,11 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginTop: 46,
+    alignItems: "center",
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
   },
 });
